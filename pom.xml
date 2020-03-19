@@ -102,7 +102,7 @@
                     <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
                     <from>
                         <!--使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8-->
-<!--                        <image>openjdk:8u212-jdk-stretch</image>-->
+                        <!--<image>openjdk:8u212-jdk-stretch</image>-->
                         <image>
                             172.39.8.10:8082/bmc/adoptopenjdk@sha256:6c7a532e2833da98bb4c04f70dfcb73ff6c65340a779f77ffb821cf22cfec536
                         </image>
