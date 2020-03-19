@@ -1,0 +1,37 @@
+server:
+  port: 1002
+
+spring:
+  application:
+    name: gateway-service
+  security:
+    user:
+      name: user
+      password: 123456
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+        - id: eureks-discovery
+          uri: lb://EUREKS-DISCOVERY
+          predicates:
+            - Path=/disc/test/**
+          filters:
+            - StripPrefix=1
+            - RequestTime=true
+#注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+  instance:
+    prefer-ip-address: false
+
+info:
+  name: gateway-service structure starter
+  version: 1.0
+  publishtime: 2020-03-17
+  description: testing

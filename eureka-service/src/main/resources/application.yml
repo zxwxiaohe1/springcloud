@@ -1,0 +1,28 @@
+server:
+  port: 1000
+
+eureka:
+  client:
+    # 此应用为注册中心，false：不向注册中心注册自己。
+    register-with-eureka: false
+    #因为该服务没有注册到其他注册中心，所以关闭从注册中心拉取服务列表。
+    #如果是服务注册中心集群，需要开启，开启就是去掉该配置，采用默认配置即可
+    fetch-registry: false
+    service-url:
+      #服务注册中心地址，http://账号:密码@主机名称:端口/Eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+
+  server:
+    #设置心跳正常的阀值，默认为1，测试时可以调低
+    renewalPercentThreshold: 1
+
+spring:
+  application:
+    #服务名称,自定义
+    name: eureka-server
+  security:
+    user:
+      #配置BASIC认证登录的账号
+      name: user
+      #配置BASIC认证登录的密码
+      password: 123456

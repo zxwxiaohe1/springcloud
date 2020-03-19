@@ -1,0 +1,39 @@
+server:
+  port: 1004
+
+spring:
+  application:
+    name: gateway-zuul-service
+  security:
+    user:
+      name: user
+      password: 123456
+#    sleuth:
+#      sampler:
+#        percentage: 1.0
+#    zipkin:
+#      base-url: http://localhost:9411
+
+#注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+  instance:
+    prefer-ip-address: false
+
+zuul:
+  sensitive-headers:
+  routes:
+    eureks-discovery:
+      path: /test-api/**
+      serviceId: eureks-discovery
+  #默认1000
+  host:
+    socket-timeout-millis: 2000
+    connect-timeout-millis: 4000
+info:
+  name: gateway zuul service structure starter
+  version: 1.0
+  publishtime: 2020-03-17
+  description: testing

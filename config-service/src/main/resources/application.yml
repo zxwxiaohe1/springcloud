@@ -1,0 +1,39 @@
+server:
+  port: 1001
+
+spring:
+  application:
+    name: config-service
+  #由于服务端加入spring securit的验证配置 需要加上这个配置信息来能够访问
+  security:
+    user:
+      name: user
+      password: 123456
+  # 选择的同步工具
+  cloud:
+    config:
+      server:
+        git:
+          # git地址
+          uri: https://github.com/zxwxiaohe1/properties.git
+          # 搜索目录
+          search-paths: properties
+          # git仓库default-label默认值是master
+          default-label: master
+          clone-on-start: true
+          force-pull: true
+          username: 18428344227@163.com
+          password: 111111xGithub
+eureka:
+  client:
+    serviceUrl:
+      #注册中心配置
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+  instance:
+    prefer-ip-address: false
+
+info:
+  name: config service structure starter
+  version: 1.0
+  publishtime: 2020-03-17
+  description: testing

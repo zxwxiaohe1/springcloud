@@ -1,0 +1,29 @@
+server:
+  port: 1003
+spring:
+  application:
+    name: eureks-discovery
+    #由于服务端加入spring securit的验证配置 需要加上这个配置信息来能够访问
+  security:
+    user:
+      name: user
+      password: 123456
+  cloud:
+    config:
+      # 环境名，对应Config Server的env
+      profile: dev
+      discovery:
+        # 开启配置服务发现
+        enabled: true
+        # 配置服务实例名称，也就是Config Server的应用名
+        service-id: config-service
+        # 是配置分支名，默认是master,可以不配置
+        label: master
+
+#注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+  instance:
+    prefer-ip-address: false
