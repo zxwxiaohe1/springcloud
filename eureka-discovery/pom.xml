@@ -18,6 +18,10 @@
 
     <properties>
         <common.core.version>1.0-SNAPSHOT</common.core.version>
+        <!--Docker容器的端口,子工程覆盖-->
+        <docker-container-port>1003</docker-container-port>
+        <!--Docker容器的远程调试端口，其值应该是docker-container-port+10000，,子工程覆盖-->
+        <docker-container-remote-debug-port>11003</docker-container-remote-debug-port>
     </properties>
 
     <dependencies>

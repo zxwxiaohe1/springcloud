@@ -1,5 +1,9 @@
 server:
   port: 1003
+eureka-service:
+  eureka:
+    ip: 172.39.8.204
+    port: 1000
 spring:
   application:
     name: eureks-discovery
@@ -24,6 +28,6 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka-service.eureka.ip}:${eureka-service.eureka.port}/eureka/
   instance:
     prefer-ip-address: false

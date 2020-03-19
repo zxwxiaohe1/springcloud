@@ -1,6 +1,9 @@
 server:
   port: 1001
-
+config-service:
+  eureka:
+    ip: 172.39.8.204
+    port: 1000
 spring:
   application:
     name: config-service
@@ -28,7 +31,7 @@ eureka:
   client:
     serviceUrl:
       #注册中心配置
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${config-service.eureka.ip}:${config-service.eureka.port}/eureka/
   instance:
     prefer-ip-address: false
 

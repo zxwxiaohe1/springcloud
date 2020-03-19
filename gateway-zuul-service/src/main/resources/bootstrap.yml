@@ -1,6 +1,9 @@
 server:
   port: 1004
-
+zuul-service:
+  eureka:
+    ip: 172.39.8.204
+    port: 1000
 spring:
   application:
     name: gateway-zuul-service
@@ -18,7 +21,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${zuul-service.eureka.ip}:${zuul-service.eureka.port}/eureka/
   instance:
     prefer-ip-address: false
 

@@ -26,6 +26,12 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
         <nexus.url>http://172.39.8.241:8081</nexus.url>
+        <docker-images-url>172.39.8.241:5000</docker-images-url>
+        <!--Docker容器的端口,子工程覆盖-->
+        <docker-container-port>undefined</docker-container-port>
+        <!--Docker容器的远程调试端口，其值应该是docker-container-port+10000，,子工程覆盖-->
+        <docker-container-remote-debug-port>undefined</docker-container-remote-debug-port>
+        <jib-maven-plugin.version>1.7.1.1-LONGQINSI</jib-maven-plugin.version>
         <eureka-service.version>1.0-SNAPSHOT</eureka-service.version>
         <gateway-service.version>1.0-SNAPSHOT</gateway-service.version>
         <gateway-zuul-service.version>1.0-SNAPSHOT</gateway-zuul-service.version>
@@ -81,6 +87,62 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--使用jib插件-->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib-maven-plugin.version}</version>
+                <configuration>
+                    <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+                    <from>
+                        <!--使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8-->
+<!--                        <image>openjdk:8u212-jdk-stretch</image>-->
+                        <image>
+                            172.39.8.10:8082/bmc/adoptopenjdk@sha256:6c7a532e2833da98bb4c04f70dfcb73ff6c65340a779f77ffb821cf22cfec536
+                        </image>
+                    </from>
+                    <to>
+                        <image>${docker-images-url}/${project.artifactId}</image>
+                        <tags>
+                            <tag>latest</tag>
+                            <tag>${project.version}</tag>
+                        </tags>
+                        <auth>
+                            <username>admin</username>
+                            <password>admin123</password>
+                        </auth>
+                    </to>
+                    <!--容器相关的属性-->
+                    <container>
+                        <!--jvm内存参数-->
+                        <jvmFlags>
+                            <jvmFlag>-Dfile.encoding=UTF-8</jvmFlag>
+                            <jvmFlag>-Dsun.jnu.encoding=UTF-8</jvmFlag>
+                            <jvmFlag>-Xms4g</jvmFlag>
+                            <jvmFlag>-Xmx4g</jvmFlag>
+                        </jvmFlags>
+                        <!--要暴露的端口-->
+                        <ports>
+                            <port>${docker-container-port}</port>
+                            <port>${docker-container-remote-debug-port}</port>
+                        </ports>
+                    </container>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
