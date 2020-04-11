@@ -9,9 +9,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -23,7 +20,6 @@ import java.util.ArrayList;
 public enum JacksonUtils {
     ;
     private static ObjectMapper mapper = new ObjectMapper();
-    private static Logger logger = LoggerFactory.getLogger(JacksonUtils.class);
 
     /**
      * @param obj Object类型
@@ -36,6 +32,7 @@ public enum JacksonUtils {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.writeValue(gen, obj);
         gen.close();
+
         return sw.toString();
     }
 

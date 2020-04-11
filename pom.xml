@@ -37,6 +37,7 @@
         <gateway-zuul-service.version>1.0-SNAPSHOT</gateway-zuul-service.version>
         <config-service.version>1.0-SNAPSHOT</config-service.version>
         <eureka-discovery.version>1.0-SNAPSHOT</eureka-discovery.version>
+        <lombok.version>1.18.4</lombok.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,12 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- lombok依赖 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
     <distributionManagement>
