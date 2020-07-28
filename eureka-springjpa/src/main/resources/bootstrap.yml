@@ -1,0 +1,66 @@
+server:
+  port: 1005
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.39.8.241:3306/self-test?useUnicode=true&characterEncoding=utf-8  #解决中文乱码的问题
+    username: root
+    password: 111111x
+  jpa:
+    hibernate:
+      ddl-auto: update  #数据库同步代码
+    show-sql: true      #dao操作时，显示sql语句
+  application:
+    name: eureka-springjpa
+    #由于服务端加入spring securit的验证配置 需要加上这个配置信息来能够访问
+  #  security:
+  #    user:
+  #      name: user
+  #      password: 123456
+  cloud:
+    config:
+      # 环境名，对应Config Server的env
+      profile: dev
+      discovery:
+        # 开启配置服务发现
+        enabled: true
+        # 配置服务实例名称，也就是Config Server的应用名
+        service-id: config-service
+        # 是配置分支名，默认是master,可以不配置
+        label: master
+mysql:
+#注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      #      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.39.8.204:1000/eureka/
+      defaultZone: http://172.39.8.204:1000/eureka/
+  instance:
+    prefer-ip-address: false
+hystrix:
+  command:
+    default:  #default全局有效，com.cdhr.bmc.fac_equ_status.application.service id指定应用有效
+      execution:
+        timeout:
+          enabled: true  #是否开启超时熔断
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000 #断路器超时时间，默认1000ms
+  threadpool:
+    default:
+      coreSize: 80
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 30000
+        read-timeout: 30000
+fallback:
+  isolation:
+    semaphore:
+      maxConcurrentRequests: 50
+#ribbon:
+#  ConnectTimeout: 10000 # ribbon链接超时时长
+#  ReadTimeout: 10000 # ribbon读取超时时间长
