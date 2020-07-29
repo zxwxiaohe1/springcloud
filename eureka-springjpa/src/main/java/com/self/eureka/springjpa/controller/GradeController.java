@@ -1,5 +1,7 @@
 package com.self.eureka.springjpa.controller;
 
+import com.self.eureka.springjpa.assembler.GradeAssembler;
+import com.self.eureka.springjpa.dto.GradeDto;
 import com.self.eureka.springjpa.entity.Grade;
 import com.self.eureka.springjpa.entity.Student;
 import com.self.eureka.springjpa.service.GradeService;
@@ -18,6 +20,8 @@ public class GradeController {
 
     @Autowired
     private GradeService gradeService;
+    @Autowired
+    private GradeAssembler gradeAssembler;
 
     @PostMapping
     public String getGrade(@RequestBody Grade grade) {
@@ -26,8 +30,8 @@ public class GradeController {
     }
 
     @GetMapping("{grdId}")
-    public Grade getGrade(@PathVariable Integer grdId) {
-        return gradeService.get(grdId);
+    public GradeDto getGrade(@PathVariable Integer grdId) {
+        return gradeAssembler.toDto(gradeService.get(grdId));
     }
 
     @DeleteMapping("{grdId}")

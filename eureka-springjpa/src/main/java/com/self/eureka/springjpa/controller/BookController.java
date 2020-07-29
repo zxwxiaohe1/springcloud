@@ -1,5 +1,7 @@
 package com.self.eureka.springjpa.controller;
 
+import com.self.eureka.springjpa.assembler.BookAssembler;
+import com.self.eureka.springjpa.dto.BookDto;
 import com.self.eureka.springjpa.entity.Book;
 import com.self.eureka.springjpa.entity.Grade;
 import com.self.eureka.springjpa.service.BookService;
@@ -18,6 +20,8 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private BookAssembler bookAssembler;
 
     @PostMapping
     public String getGrade(@RequestBody Book book) {
@@ -26,8 +30,8 @@ public class BookController {
     }
 
     @GetMapping("{bookId}")
-    public Book getBook(@PathVariable Integer bookId) {
-        return bookService.get(bookId);
+    public BookDto getBook(@PathVariable Integer bookId) {
+        return bookAssembler.toDto(bookService.get(bookId));
     }
 
     @DeleteMapping("{bookId}")

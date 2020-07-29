@@ -1,8 +1,10 @@
 package com.self.eureka.springjpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,6 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "jpa_book")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +25,6 @@ public class Book {
     private String name;
     @Column(name = "price", length = 3)
     private Integer price;
-
-    @ManyToMany
-    @JoinTable(name = "jpa_stu_book",
-            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "stu_id", referencedColumnName = "id")},
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"book_id", "stu_id"})})
+    @ManyToMany(mappedBy = "books")
     private List<Student> students;
 }

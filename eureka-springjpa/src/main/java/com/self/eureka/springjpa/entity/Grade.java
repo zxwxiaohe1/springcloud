@@ -1,7 +1,7 @@
 package com.self.eureka.springjpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-
 import javax.persistence.*;
 
 /**
@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "jpa_grade")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class Grade {
 
     @Id
@@ -24,7 +25,6 @@ public class Grade {
     private Integer score;
     @Column(name = "level", length = 10)
     private String level;
-
-    @OneToOne
+    @Transient
     private Student student;
 }
