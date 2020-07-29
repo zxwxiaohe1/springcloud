@@ -20,9 +20,9 @@ spring:
   application:
     #服务名称,自定义
     name: eureka-server
-  security:
-    user:
-      #配置BASIC认证登录的账号
-      name: user
-      #配置BASIC认证登录的密码
-      password: 123456
+#  security:
+#    user:
+#      #配置BASIC认证登录的账号
+#      name: user
+#      #配置BASIC认证登录的密码
+#      password: 123456

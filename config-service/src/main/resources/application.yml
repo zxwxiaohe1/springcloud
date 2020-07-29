@@ -8,10 +8,10 @@ spring:
   application:
     name: config-service
   #由于服务端加入spring securit的验证配置 需要加上这个配置信息来能够访问
-  security:
-    user:
-      name: user
-      password: 123456
+#  security:
+#    user:
+#      name: user
+#      password: 123456
   # 选择的同步工具
   profiles:
     active: native
@@ -35,7 +35,8 @@ eureka:
   client:
     serviceUrl:
       #注册中心配置
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${config-service.eureka.ip}:${config-service.eureka.port}/eureka/
+#      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${config-service.eureka.ip}:${config-service.eureka.port}/eureka/
+      defaultZone: http://${config-service.eureka.ip}:${config-service.eureka.port}/eureka/
   instance:
     prefer-ip-address: false
 

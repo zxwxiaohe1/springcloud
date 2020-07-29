@@ -29,6 +29,7 @@ public class GradeAssembler implements DTOAssembler<Grade, GradeDto> {
         gradeDto.setId(grade.getId());
         gradeDto.setCourse(grade.getCourse());
         gradeDto.setLevel(grade.getLevel());
+        gradeDto.setScore(grade.getScore());
         if (!ObjectUtils.isEmpty(grade.getStudent())) {
             StudentDto studentDto = new StudentDto();
             studentDto.setId(grade.getStudent().getId());
