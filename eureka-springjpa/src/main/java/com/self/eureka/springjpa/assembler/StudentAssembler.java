@@ -1,10 +1,7 @@
 package com.self.eureka.springjpa.assembler;
 
-import com.self.eureka.springjpa.dto.BookDto;
-import com.self.eureka.springjpa.dto.GradeDto;
-import com.self.eureka.springjpa.dto.StudentDto;
-import com.self.eureka.springjpa.dto.TeacherDto;
-import com.self.eureka.springjpa.entity.Grade;
+import com.self.eureka.springjpa.dto.*;
+import com.self.eureka.springjpa.entity.IdCard;
 import com.self.eureka.springjpa.entity.Student;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -68,6 +65,13 @@ public class StudentAssembler implements DTOAssembler<Student, StudentDto> {
                 teachers.add(teacherDto);
             });
             studentDto.setTeachers(teachers);
+        }
+        if (!ObjectUtils.isEmpty(student.getIdCard())) {
+            IdCardDto idCardDto = new IdCardDto();
+            idCardDto.setId(student.getIdCard().getId());
+            idCardDto.setNum(student.getIdCard().getNum());
+            idCardDto.setRemarts(student.getIdCard().getRemarts());
+            studentDto.setIdCard(idCardDto);
         }
         return studentDto;
     }

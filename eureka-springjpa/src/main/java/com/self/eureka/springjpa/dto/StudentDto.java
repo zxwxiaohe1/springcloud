@@ -21,4 +21,5 @@ public class StudentDto {
     private List<TeacherDto> teachers;
     private List<GradeDto> grades;
     private List<BookDto> books;
+    private IdCardDto idCard;
 }

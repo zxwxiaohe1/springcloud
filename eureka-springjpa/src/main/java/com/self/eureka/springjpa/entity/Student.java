@@ -46,4 +46,11 @@ public class Student {
             inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"stu_id", "book_id"})})
     private List<Book> books;
+
+    @OneToOne
+    @JoinTable(name = "jpa_stu_idcard",
+            joinColumns = {@JoinColumn(name = "stu_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "idcard_id", referencedColumnName = "id")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"stu_id", "idcard_id"})})
+    private IdCard idCard;
 }

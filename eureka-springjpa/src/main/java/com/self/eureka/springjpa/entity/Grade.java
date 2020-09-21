@@ -2,6 +2,7 @@ package com.self.eureka.springjpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+
 import javax.persistence.*;
 
 /**
@@ -12,11 +13,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "jpa_grade")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Grade {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 11)
     private Integer id;
     @Column(name = "course", length = 10)
@@ -25,6 +26,10 @@ public class Grade {
     private Integer score;
     @Column(name = "level", length = 10)
     private String level;
-    @Transient
+    @OneToOne
+    @JoinTable(name = "jpa_stu_grad",
+            joinColumns = {@JoinColumn(name = "grad_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "stu_id", referencedColumnName = "id")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"grad_id", "stu_id"})})
     private Student student;
 }
