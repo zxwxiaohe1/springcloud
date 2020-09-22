@@ -2,9 +2,7 @@ package com.self.eureka.springjpa.service;
 
 import com.self.eureka.springjpa.entity.Student;
 import com.self.eureka.springjpa.entity.Teacher;
-import com.self.eureka.springjpa.repository.StudentRepository;
-import com.self.eureka.springjpa.repository.TeachAndStuRepository;
-import com.self.eureka.springjpa.repository.TeacherRepository;
+import com.self.eureka.springjpa.repository.*;
 import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,10 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
+    private IdCardRepository idCardRepository;
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
     private TeachAndStuRepository teachAndStuRepository;
 
     public Student get(@NonNull Integer stuId) {
@@ -41,8 +43,8 @@ public class StudentService {
 
     public void del(@NonNull Integer stuId) {
         teachAndStuRepository.delTchAndStuByStuId(Arrays.asList(stuId));
-//        teachAndStuRepository.delStuAndGradByStuId(Arrays.asList(stuId));
-//        teachAndStuRepository.delStuAndBookByStuId(Arrays.asList(stuId));
+//        idCardRepository.delStuByStuId(Arrays.asList(stuId));
+//        bookRepository.delStuByStuId(Arrays.asList(stuId));
         studentRepository.deleteById(stuId);
     }
 

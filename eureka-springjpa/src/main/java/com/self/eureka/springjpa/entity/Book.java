@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "jpa_book")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

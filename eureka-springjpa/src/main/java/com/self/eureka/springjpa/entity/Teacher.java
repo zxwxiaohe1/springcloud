@@ -33,8 +33,10 @@ public class Teacher {
     private String position;
     @ManyToMany
     @JoinTable(name = "jpa_tch_stu",
-            joinColumns = {@JoinColumn(name = "stu_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "tch_id", referencedColumnName = "id")},
+            /**本对象id*/
+            joinColumns = {@JoinColumn(name = "tch_id", referencedColumnName = "id")},
+            /**关联对象id*/
+            inverseJoinColumns = {@JoinColumn(name = "stu_id", referencedColumnName = "id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"stu_id", "tch_id"})})
     private List<Student> students;
 }
