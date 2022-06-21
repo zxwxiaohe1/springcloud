@@ -23,7 +23,7 @@
         <!--Docker容器的远程调试端口，其值应该是docker-container-port+10000，,子工程覆盖-->
         <docker-container-remote-debug-port>11003</docker-container-remote-debug-port>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
-        <mysql-connector-java.version>6.0.6</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
     </properties>
 
     <dependencies>
